@@ -4,7 +4,7 @@
 var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
-var User       		= require('../app/models/user');
+var User       		= require('../app/models/user'); 
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -41,6 +41,9 @@ module.exports = function(passport) {
     },
     function(req, email, password, done) {
 
+        console.log("I AM HEREEEE")
+        console.log(req.body)
+
 		// find a user whose email is the same as the forms email
 		// we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
@@ -55,13 +58,26 @@ module.exports = function(passport) {
 
 				// if there is no user with that email
                 // create the user
-                var newUser            = new User();
+                var newUser = new User();
 
-                // set the user's local credentials
-                newUser.local.email    = email;
+                // set the user's local credentials aka info
+                //"newUser" (object) is attribute/key
+                // located in local(object) where you will find email,password, etc.. aka info of key value pairs 
+                // local is stored inside schema aka constructor is where all instances of objects are stored 
+                //inside local you have stored all the users info like email password ccancer type, preferred lang, etc,..
+               
+                newUser.local.email    = email; 
                 newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
+                newUser.local['warrior-name'] = req.body['warrior-name'],
+                newUser.local['warrior-status'] = req.body['warrior-status'],
+                newUser.local['caregiver-patient-name'] = req.body['caregiver-patient-name'],
+                newUser.local['caregiver-patient-status'] = req.body['caregiver-patient-status'],
+                newUser.local['relationship-type'] = req.body['relationship-type'],
+                newUser.local['cancer-type'] = req.body['cancer-type'],
+                newUser.local['lang-type'] = req.body['lang-type']
 
-				// save the user
+
+				// save method the user
                 newUser.save(function(err) {
                     if (err)
                         throw err;
