@@ -7,11 +7,59 @@ module.exports = function(app, passport, db) {
         res.render('index.ejs');
     });
 
-    // PROFILE SECTION =========================
-    app.get('/profile', isLoggedIn, function(req, res) { // checks to see if logged in or send them back to homepage if not logged in 
+    // community-page SECTION =========================
+    app.get('/community-page', isLoggedIn, function(req, res) { // checks to see if logged in or send them back to homepage if not logged in 
         db.collection('messages').find().toArray((err, result) => {
           if (err) return console.log(err)
-          res.render('profile.ejs', {
+          res.render('community-page.ejs', {
+            user : req.user,//showcases there usr name when logged in
+            messages: result
+          })
+        })
+    });
+
+    // JOURNAL ENTRY SECTION =========================
+    app.get('/journal-entry', isLoggedIn, function(req, res) { // checks to see if logged in or send them back to homepage if not logged in 
+      console.log('journal-entry')
+        db.collection('messages').find().toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('journal-entry.ejs', {
+            user : req.user,//showcases there usr name when logged in
+            messages: result
+          })
+        })
+    });
+
+        // MY JOURNALS ENTRIES SECTION =========================
+    app.get('/my-journals', isLoggedIn, function(req, res) { // checks to see if logged in or send them back to homepage if not logged in 
+      console.log('my-journals')
+        db.collection('messages').find().toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('my-journals.ejs', {
+            user : req.user,//showcases there usr name when logged in
+            messages: result
+          })
+        })
+    });
+
+        // VISUALIZATION SECTION =========================
+    app.get('/visualization', isLoggedIn, function(req, res) { // checks to see if logged in or send them back to homepage if not logged in 
+      console.log('visualization')
+        db.collection('messages').find().toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('visualization.ejs', {
+            user : req.user,//showcases there usr name when logged in
+            messages: result
+          })
+        })
+    });
+
+        // ACCOUNT SETTINGS SECTION =========================
+    app.get('/account-settings', isLoggedIn, function(req, res) { // checks to see if logged in or send them back to homepage if not logged in 
+      console.log('account-settings')
+        db.collection('account-settings').find().toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('account-settings.ejs', {
             user : req.user,//showcases there usr name when logged in
             messages: result
           })
@@ -32,7 +80,7 @@ module.exports = function(app, passport, db) {
       db.collection('messages').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
-        res.redirect('/profile')
+        res.redirect('/community-page')
       })
     })
 
@@ -90,7 +138,7 @@ module.exports = function(app, passport, db) {
 
         // process the login form
         app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/profile', // redirect to the secure profile section
+            successRedirect : '/community-page', // redirect to the secure community-page section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -103,7 +151,7 @@ module.exports = function(app, passport, db) {
 
         // process the signup form
         app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/profile', // redirect to the secure profile section
+            successRedirect : '/community-page', // redirect to the secure community-page section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -121,7 +169,7 @@ module.exports = function(app, passport, db) {
         user.local.email    = undefined;
         user.local.password = undefined;
         user.save(function(err) {
-            res.redirect('/profile');
+            res.redirect('/community-page');
         });
     });
 
