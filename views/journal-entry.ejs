@@ -12,19 +12,7 @@
 
 <body>
 
-  <!-- NAV BAR  -->
   <div>
-    <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar"
-      aria-controls="separator-sidebar" type="button"
-      class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-      <span class="sr-only">Open sidebar</span>
-      <svg class="w-6 h-6 mr-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg">
-        <path clip-rule="evenodd" fill-rule="evenodd"
-          d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-        </path>
-      </svg>
-    </button>
 
     <!-- NAV SIDE BAR -->
     <aside id="separator-sidebar"
@@ -152,326 +140,206 @@
           </p>
         </div>
 
-        <!-- WELLNESS DATA ENTRY -->
-        <div class="items-center justify-center h-48 pl-8 pt-8  mb-4 rounded bg-gray-50 dark:bg-gray-800">
-         
-          <div class="text-2xl text-gray-400 dark:text-gray-500 ">
-            <h2>Health Biometrics</h2>
-
-            <div class="grid grid-cols-5 gap-4">
-
-              <!-- TIME FIELD -->
-              <div>
-                <div class="mb-6">
-                  <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</label>
-                  <input type="time" id="time" name="time"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
-              </div>
-
-              <!-- ENTRY TYPE FIELD -->
-              <div>
-                <label for="entry-type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Entry Type
-                </label>
-                
-                <select id="entry-type" name="entry-type"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required>
-                  <option value="" selected> Select Entry </option>
-                  <option value="Sleep">Sleep</option>
-                  <option value="Food">Food</option>
-                </select>
-              </div>
-
-              <!-- FOOD FIELDS  -->
-              <div class="col-span-3" id="food-input">
-                <div class="grid grid-cols-3 gap-4">
-                  <div class="col-span-2">
-                    <label for="food" class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Food Entry</label>
-                    <input type="text" id="food" name="food"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  </div>
-                  <div>
-                    <label for="protein" class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Protein Intake (g)</label>
-                    <input type="number" id="protein" name="protein"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> 
-                  </div>
-             
-                </div>
-              </div>
-
-              <!-- SLEEP FIELDS -->
-              <div class="col-span-3" id="sleep-input">
-                <div class="grid grid-cols-3 gap-4">
-                  <div>
-                    <label for="sleep" class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Hours Slept (hrs)</label>
-                    <input type="number" id="sleep" name="sleep"
+        <form action="/journal-entry" method="POST" >
+          <!-- WELLNESS DATA ENTRY -->
+          <div class="items-center justify-center h-48 pl-8 pt-8  mb-4 rounded bg-gray-50 dark:bg-gray-800">
+          
+            <div class="text-2xl text-gray-400 dark:text-gray-500 ">
+              <h2>Health Biometrics</h2>
+          
+              <div class="grid grid-cols-5 gap-4">
+          
+                <!-- TIME FIELD -->
+                <div>
+                  <div class="mb-6">
+                    <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</label>
+                    <input type="time" id="time" name="time"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   </div>
                 </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- USERS JOURNAL ENTRY  -->
-        <div class="items-center justify-center pl-8 pt-8 pb-8 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-        
-          <div class="text-2xl text-gray-400 dark:text-gray-500 ">
-
-            <h2>Self-Care Entry</h2>
-
-            <!-- DATE FATIGUE MOOD TREATMENT FIELDS -->
-            <div class="grid grid-cols-4 gap-4 pt-8">
-
-              <!-- ENTRY DATE FIELD -->
-              <div>
-                <label for="date-entry" class=" text-sm font-medium text-gray-900 dark:text-white">Entry Date</label>
-                <div class="relative max-w-sm">
-                  <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none ">
-                    <svg class="w-4 h-4 ml-2 mr-2 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                    </svg>
-                  </div>
-                  <input datepicker type="text" name="entry-date" id="entry-date"
-                    class="pl-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Select date">
+          
+                <!-- ENTRY TYPE FIELD -->
+                <div>
+                  <label for="entry-type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Entry Type
+                  </label>
+          
+                  <select id="entry-type" name="entry-type"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+                    <option value="" selected> Select Entry </option>
+                    <option value="Sleep">Sleep</option>
+                    <option value="Food">Food</option>
+                  </select>
                 </div>
-
-              </div>
-
-              <!-- FATIGUE LEVEL SLIDER FIELD  -->
-              <div>
-                <label for="fatigue-entry" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Fatigue Level
-                </label>
-                
-                <select id="fatigue-entry" name="fatigue-entry"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required>
-                  <option value="" selected> Select Fatigue Level </option>
-                  <option value="1">1 being the worst</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10 being you feeling great</option>
-                </select>
-
-              </div>
-
-              <!-- SLECT MOOD FIELD -->
-              <div>
-                <label for="mood" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select How Your Feeling</label>
-                <select name="mood" id="mood"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option>Happy</option>
-                  <option>Creative</option>
-                  <option>Grateful</option>
-                  <option>Excited</option>
-                  <option>Sad</option>
-                  <option>Mad</option>
-                  <option>Tired</option>
-                </select>
-              </div>
-
-              <!-- TREATMENT FIELD -->
-              <div>
-                <label for="treatment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Status Treatment</label>
-                <select name="treatment" id="treatment"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option>None</option>
-                  <option>Chemothearpy</option>
-                  <option>Hydration</option>
-                  <option>Radiation</option>
-                  <option>Surgery</option>
-                </select>
+          
+                <!-- FOOD FIELDS  -->
+                <div class="col-span-3" id="food-input">
+                  <div class="grid grid-cols-3 gap-4">
+                    <div class="col-span-2">
+                      <label for="food" class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Food Entry</label>
+                      <input type="text" id="food" name="food"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div>
+                      <label for="protein" class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Protein Intake
+                        (g)</label>
+                      <input type="number" id="protein" name="protein" min="0" max="250"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+          
+                  </div>
+                </div>
+          
+                <!-- SLEEP FIELDS -->
+                <div class="col-span-3" id="sleep-input">
+                  <div class="grid grid-cols-3 gap-4">
+                    <div>
+                      <label for="sleep" class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Hours Slept (hrs)</label>
+                      <input type="number" id="sleep" name="sleep" min="0" max="24"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                  </div>
+                </div>
+          
               </div>
             </div>
-
-            <!--  IMAGE  -->
-            <div class="grid gap-4 pt-8">
-              <div>
-                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image URL For Post</label>
-                <input type="text" name="image" id="modal-image"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="https://imageURL.com/" required="">
+          </div>
+          
+          <!-- USERS JOURNAL ENTRY  -->
+          <div class="items-center justify-center pl-8 pt-8 pb-8 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+          
+            <div class="text-2xl text-gray-400 dark:text-gray-500 ">
+          
+              <h2>Self-Care Entry</h2>
+          
+              <!-- DATE FATIGUE MOOD TREATMENT FIELDS -->
+              <div class="grid grid-cols-4 gap-4 pt-8">
+          
+                <!-- ENTRY DATE FIELD -->
+                <div>
+                  <label for="date-entry" class=" text-sm font-medium text-gray-900 dark:text-white">Entry Date</label>
+                  <div class="relative max-w-sm">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none ">
+                      <svg class="w-4 h-4 ml-2 mr-2 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                          d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                      </svg>
+                    </div>
+                    <input datepicker type="text" name="entry-date" id="entry-date"
+                      class="pl-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Select date">
+                  </div>
+          
+                </div>
+          
+                <!-- FATIGUE LEVEL SLIDER FIELD  -->
+                <div>
+                  <label for="fatigue-entry" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Fatigue Level
+                  </label>
+          
+                  <select id="fatigue-entry" name="fatigue-entry"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+                    <option value="" selected> Select Fatigue Level </option>
+                    <option value="1">1 being the worst</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 being you feeling great</option>
+                  </select>
+          
+                </div>
+          
+                <!-- SLECT MOOD FIELD -->
+                <div>
+                  <label for="mood" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select How Your
+                    Feeling</label>
+                  <select name="mood" id="mood"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option>Happy</option>
+                    <option>Creative</option>
+                    <option>Grateful</option>
+                    <option>Excited</option>
+                    <option>Sad</option>
+                    <option>Mad</option>
+                    <option>Tired</option>
+                  </select>
+                </div>
+          
+                <!-- TREATMENT FIELD -->
+                <div>
+                  <label for="treatment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Status
+                    Treatment</label>
+                  <select name="treatment" id="treatment"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option>None</option>
+                    <option>Chemothearpy</option>
+                    <option>Hydration</option>
+                    <option>Radiation</option>
+                    <option>Surgery</option>
+                  </select>
+                </div>
+              </div>
+          
+              <!--  IMAGE  -->
+              <div class="grid gap-4 pt-8">
+                <div>
+                  <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image URL For
+                    Post</label>
+                  <input type="text" name="image" id="modal-image"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="https://imageURL.com/" required="">
+                </div>
+              </div>
+          
+              <!--  DIARY  -->
+              <div class="grid gap-4 pt-8">
+                <div>
+                  <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Self Care
+                    Reflection</label>
+                  <textarea id="description" name="description" rows="8"
+                    class="w-full block p-2.5  text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Your description here"></textarea>
+                </div>
+              </div>
+          
+              <div class=" gap-4 pt-8">
+                <button type="submit"
+                  class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                  Create Entry 🌱</button>
               </div>
             </div>
-
-            <!--  DIARY  -->
-            <div class="grid gap-4 pt-8">
-              <div>
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Self Care Reflection</label>
-                <textarea id="description" name="description" rows="8"
-                  class="w-full block p-2.5  text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Your description here"></textarea>
-              </div>
-            </div>
-
-            <div class=" gap-4 pt-8">
-              <button type="button" 
-                class="  text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"> Create Entry 🌱</button>
-            </div>            
+          
           </div>
 
-        </div>
+          <!-- key "name = "id" sent to server  & added type=hidden to hide it in the DOM -->
+          <input type="hidden" id="creatorId" name="creatorId" value="<%= user._id %>" />
+          <input type="hidden" id="warrior-name" name="warrior-name" value="<%= user.local['warrior-name']%>" />
+          <input type="hidden" id="warrior-status" name="warrior-status" value="<%= user.local['warrior-status'] %>" />
+          <input type="hidden" id="caregiver-patient-name" name="caregiver-patient-name" value="<%= user.local['caregiver-patient-name'] %>" />
+          <input type="hidden" id="caregiver-patient-status" name="caregiver-patient-status" value="<%= user.local['caregiver-patient-status'] %>" />
+          <input type="hidden" id="relationship-type" name="relationship-type" value="<%= user.local['relationship-type'] %>" />
+          <input type="hidden" id="cancer-type" name="cancer-type" value="<%= user.local['cancer-type'] %>" />
+          <input type="hidden" id="lang-type" name="lang-type" value="<%= user.local['lang-type'] %>" />
+
+
+
+        </form>
+
         
-        <!-- <div class="grid grid-cols-2 gap-4 mb-4">
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 1v16M1 9h16" />
-              </svg>
-            </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 1v16M1 9h16" />
-              </svg>
-            </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 1v16M1 9h16" />
-              </svg>
-            </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 1v16M1 9h16" />
-              </svg>
-            </p>
-          </div>
-        </div> -->
-        <!-- <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-          <p class="text-2xl text-gray-400 dark:text-gray-500">
-            <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-              viewBox="0 0 18 18">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 1v16M1 9h16" />
-            </svg>
-          </p>
-        </div> -->
-        <!-- <div class="grid grid-cols-2 gap-4">
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 1v16M1 9h16" />
-              </svg>
-            </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 1v16M1 9h16" />
-              </svg>
-            </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 1v16M1 9h16" />
-              </svg>
-            </p>
-          </div>
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 1v16M1 9h16" />
-              </svg>
-            </p>
-          </div>
-        </div> -->
       </div>
     </div>
 
   </div>
 
-
-
-  <!-- <div class="container"> -->
-
-  <!-- <div class="page-header text-center">
-            <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-        </div>
-
-        <div class="row">
-
-
-            <div class="col-sm-6">
-                <div class="well">
-                    <h3><span class="fa fa-user"></span> Local</h3>
-
-                    <% if (user.local.email) { %>
-                        <p>
-                            <strong>id</strong>: <%= user._id %><br>
-                            <strong>email</strong>: <%= user.local.email %><br>
-                            <strong>password</strong>: <%= user.local.password %>
-                            <strong>cancer type</strong>: <%= user.local["cancer-type"] %><br>
-                        </p>
-
-                        <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                    <% } else { %>
-                        <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                    <% } %>
-
-                </div>
-            </div>
-            <div class="col-sm-6">
-              <h3>Messages</h3>
-              <ul class="messages">
-              <% for(var i=0; i<messages.length; i++) {%>
-                <li class="message">
-                  <span><%= messages[i].name %></span>
-                  <span><%= messages[i].msg %></span>
-                  <span><%= messages[i].thumbUp %></span>
-                  <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                  <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-                  <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
-                </li>
-              <% } %>
-              </ul>
-
-              <h2>Add a message</h2>
-            <% if (user.local.email) { %>
-              <form action="/messages" method="POST">
-                <input type="text" value="<%= user.local.email %>" name="name">
-                <input type="text" placeholder="message" name="msg">
-                <button type="submit">Submit</button>
-              </form>
-            </div>
-            <% } %> -->
-
-  <!-- </div> -->
 
   <script src="main.js"></script>
 

@@ -9,20 +9,14 @@
       <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <div display="hidden" id="loggedInUserId">
+      <%= user._id %>
+    </div>
 
-    <!-- NAV BAR  --> 
+ 
     <div>
-      <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar"
-        type="button"
-        class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-        <span class="sr-only">Open sidebar</span>
-        <svg class="w-6 h-6 mr-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path clip-rule="evenodd" fill-rule="evenodd"
-            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-          </path>
-        </svg>
-      </button>
       
+      <!-- NAV BAR -->
       <aside id="separator-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar">
@@ -122,100 +116,97 @@
         </div>
       </aside>
       
+      <!-- COMMUNITY PAGE POSTS -->
       <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           
+          <!-- HIGHLIGHTED POST  -->
           <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
             <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 1v16M1 9h16" />
-              </svg>
+              HIGHLIGHTED FEATUED POST
             </p>
           </div>
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 1v16M1 9h16" />
-                </svg>
-              </p>
+
+
+          <div class="flex items-center justify-center mb-4 rounded bg-gray-50 dark:bg-gray-800">
+
+            <!-- LIST OF JOURNAL ENTRIES APPEAR HERE -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <% for(var i=0; i<entries.length; i++) {%>
+                  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                 
+                    <a href="#">
+                      <% if(entries[i].image !==undefined || entries[i].image !=''){ %>
+                        <img class="rounded-t-lg" src="<%= entries[i].image %>" alt="" />
+                      <% } else{ %>
+                        <img class="rounded-t-lg" src="https://wallpapers.com/images/featured/nature-2ygv7ssy2k0lxlzu.jpg" alt="" />
+                      <% } %> 
+                    </a>
+              
+                    <!-- TAG ADDED FOR DIFF TYPES OF CANCER FOR EACH POST -->
+                    <!-- credit: https://stackoverflow.com/questions/63633427/switch-condition-statement-semicolon-error-inside-ejs-template -->
+                    <% switch(entries[i]['cancer-type']) { 
+                      case 'Breast' : %>
+                        <span
+                          class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Breast Cancer</span>
+                        <% break; 
+                      default : %>
+                        <span
+                          class="bg-pink-100 text-pink-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">Other</span>
+                        <% break; 
+                    } %>
+            
+                    <div class="flex items-center">
+                      
+                      <% if(entries[i].reactions[user._id] !==undefined){ %>
+                        <svg class="favorite w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"
+                          id="<%= entries[i]._id %>">
+                          <path
+                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                      <% } else{ %>
+                        <svg class="favorite w-4 h-4 text-gray-300 mr-1 dark:text-gray-500" aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20"
+                          id="<%= entries[i]._id %>">
+                          <path
+                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                      <% } %>
+
+                      <p class="ml-2 text-sm font-bold text-gray-900 dark:text-white">
+                        <%= Object.keys(entries[i].reactions).length %>
+                      </p>
+                    </div>
+      
+      
+                    <div class="p-5">
+                      <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                          Author: <%= entries[i]['warrior-name'] %>
+                        </h5>
+                      </a>
+                      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        <%= entries[i].description %>
+                      </p>
+
+
+                      <!-- If you are comparing mongoDB objectId, then use toString(). -->
+                      <!-- credit : https://stackoverflow.com/questions/57661892/ejs-comparison-between-two-same-strings -->
+                      <% if(entries[i].creatorId.toString()==user._id.toString()) { %>
+                        <a href="#"
+                          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 trash"
+                          id="<%= entries[i]._id %>">
+                          Delete
+                        </a>
+                      <% } %>
+
+                    </div>
+              
+                  </div>
+                <% } %>
             </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 1v16M1 9h16" />
-                </svg>
-              </p>
-            </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 1v16M1 9h16" />
-                </svg>
-              </p>
-            </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 1v16M1 9h16" />
-                </svg>
-              </p>
-            </div>
-          </div>
-          <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 1v16M1 9h16" />
-              </svg>
-            </p>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 1v16M1 9h16" />
-                </svg>
-              </p>
-            </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 1v16M1 9h16" />
-                </svg>
-              </p>
-            </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 1v16M1 9h16" />
-                </svg>
-              </p>
-            </div>
-            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 1v16M1 9h16" />
-                </svg>
-              </p>
-            </div>
+
           </div>
         </div>
       </div>
@@ -223,64 +214,7 @@
     </div>
 
 
-
-    <!-- <div class="container"> -->
-
-        <!-- <div class="page-header text-center">
-            <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-        </div>
-
-        <div class="row">
-
-
-            <div class="col-sm-6">
-                <div class="well">
-                    <h3><span class="fa fa-user"></span> Local</h3>
-
-                    <% if (user.local.email) { %>
-                        <p>
-                            <strong>id</strong>: <%= user._id %><br>
-                            <strong>email</strong>: <%= user.local.email %><br>
-                            <strong>password</strong>: <%= user.local.password %>
-                            <strong>cancer type</strong>: <%= user.local["cancer-type"] %><br>
-                        </p>
-
-                        <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                    <% } else { %>
-                        <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                    <% } %>
-
-                </div>
-            </div>
-            <div class="col-sm-6">
-              <h3>Messages</h3>
-              <ul class="messages">
-              <% for(var i=0; i<messages.length; i++) {%>
-                <li class="message">
-                  <span><%= messages[i].name %></span>
-                  <span><%= messages[i].msg %></span>
-                  <span><%= messages[i].thumbUp %></span>
-                  <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                  <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-                  <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
-                </li>
-              <% } %>
-              </ul>
-
-              <h2>Add a message</h2>
-            <% if (user.local.email) { %>
-              <form action="/messages" method="POST">
-                <input type="text" value="<%= user.local.email %>" name="name">
-                <input type="text" placeholder="message" name="msg">
-                <button type="submit">Submit</button>
-              </form>
-            </div>
-            <% } %> -->
-
-    <!-- </div> -->
-
-    <script src="main.js"></script>
+    <script src="community.js"></script>
 
     <!-- Tailwind Styling  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
