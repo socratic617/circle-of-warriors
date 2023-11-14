@@ -10,3 +10,7 @@ img{
 #food-input, #sleep-input{
   display: none;
 }
+
+.visual-placeholder{
+  height: 45rem;
+}
