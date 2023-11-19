@@ -5,7 +5,7 @@ module.exports = function(app, passport, db) {
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
-        res.render('index.ejs');
+        res.render('index.ejs'); 
     });
 
 
@@ -26,7 +26,11 @@ module.exports = function(app, passport, db) {
       console.log('visualization')
         db.collection('journal-entry').find().toArray((err, result) => {
           if (err) return console.log(err)
-          res.render('visualization.ejs', {
+          if(!req.query.language ){//GO OVER WITH MARK ADD SCRIPT TAG AND the select to get itt to work ******go over with mark*******
+          req.query.language= 'English'
+          }//store lang
+          res.render('visualization.ejs',  { 
+            language: req.query.language,
             user : req.user,//showcases there usr name when logged in
             messages: result
           })
