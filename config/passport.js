@@ -1,6 +1,7 @@
 // config/passport.js
 
 // load all the things we need
+//used for authentication purposes for users 
 var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
