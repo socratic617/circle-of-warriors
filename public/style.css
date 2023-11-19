@@ -7,9 +7,9 @@ img{
   height: 200px;
 }
 
-#food-input, #sleep-input{
+/* #food-input, #sleep-input{
   display: none;
-}
+} */
 
 .visual-placeholder{
   height: 45rem;
