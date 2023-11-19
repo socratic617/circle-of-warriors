@@ -132,7 +132,7 @@ document.querySelector("#entry-type-0").addEventListener("change", function(e) {
         case "Sleep":
             console.log("Sleep Selected in switch case");
             //   document.querySelector("#sleep-input").style.display = "block"
-            row.appendChild(createFoodInputs(index))
+            // row.appendChild(createFoodInputs(index))
   
             break;
         // default:
