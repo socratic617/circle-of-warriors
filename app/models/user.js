@@ -1,11 +1,11 @@
 //how to talk to my user
 
 //load the things we need
-var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
+var mongoose = require('mongoose');// to be able to talk from client to sevrer
+var bcrypt   = require('bcrypt-nodejs');// used for storing/hashing your password for security reasons
 
 // define the schema for our user model
-var userSchema = mongoose.Schema({
+var userSchema = mongoose.Schema({ //mongoose allows you to do ODM object data modeling 
 
     local             : {
         email         : String,
@@ -45,6 +45,7 @@ userSchema.methods.generateHash = function(password) {
 };
 
 // checking if password is valid
+//log in and seeing if its the same on the data base 
 userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
