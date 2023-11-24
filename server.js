@@ -5,6 +5,8 @@
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 8040;//"process.env" look for an open port to use 
+var path = require('path');//
+var i18n=require("i18n-express"); // <-- require the module
 const MongoClient = require('mongodb').MongoClient //"MongoClient " allows for making connections to MongoDB
 var mongoose = require('mongoose'); // a package giving a consistent language so that anyone on project knows how to talk to database.  importing the Mongoose library into your code. to talk to mongo database
 var passport = require('passport'); // passport: local startegy: that allows you to implement a usr name / /pass authenticatio mechanism fpr web app 
@@ -18,6 +20,8 @@ var session      = require('express-session');
 var configDB = require('./config/database.js');// grabbing my  database from my folder database.js
 
 var db
+console.log('lang')
+
 
 // configuration ===============================================================
 mongoose.connect(configDB.url, (err, database) => { //configDB is object and url is property
@@ -44,6 +48,13 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));//make unique session and creates a secret session
+
+app.use(i18n({
+  translationsPath: path.join(__dirname, 'i18n'), // <--- use here. Specify translations files path.
+  siteLangs: ["en","es"],
+  textsVarName: 'translation',
+  paramLangName: 'lang',
+})); 
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

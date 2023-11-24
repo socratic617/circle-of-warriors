@@ -25,25 +25,32 @@
 <section
     class="bg-center bg-no-repeat bg-[url('https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/978f7b45162383.585919a5e896a.gif')] bg-gray-700 bg-blend-multiply">
     <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
-        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl"> <img class="text-center" src="img/site-logo.svg" alt="logo">WELCOME TO: <br> CIRCLE OF WARRIORS</h1>
-        <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48"> JOIN A SUPPORT GROUP FOR CANCER WARRIORS</p>
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl"> <img class="text-center" src="img/site-logo.svg" alt="logo"> <%=translation.WELCOME_MSG_ONE%><br><%=translation.WELCOME_MSG_TWO%> </h1>
+
+        <!--using ejs for selecting options dynamically , if the variable of lang is 'en' then select this option vice versa when slecting 'es' which is set by the server -->
+        <select name="" id="lang">
+            <option value="en" <%=lang==='en' ? 'selected' : '' %>>English</option>  
+            <option value="es" <%=lang==='es' ? 'selected' : '' %>>Spanish</option>
+        </select>
+
+        <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48"> <%=translation.SUB_HEADER%></p>
         <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
             <a href="/login"
                 class=" mr-8 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                Login In
-              
+                <%=translation.LOG_IN_BUTTON%>
             </a>
+            <!--allows lang to go to other routes . ***Eventually use cookies **-->
             <a href="/signup"
                 class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
-                Sign Up
+                <%=translation.SIGN_UP_BUTTON%>
+                
             </a>
         </div>
     </div>
 </section>
 
-
-
 <!-- Tailwind Styling  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+<script src="/language.js"></script>
 </body>
 </html>
